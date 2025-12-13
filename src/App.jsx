@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Admin/Dashboard";
+import Login from "./pages/Auth/Login";
+import SignUp from "./pages/Auth/SignUp";
+import ManageTasks from "./pages/Admin/ManageTasks";
+import CreateTask from "./pages/Admin/CreateTask";
+import ManageUsers from "./pages/Admin/ManageUsers";
+import UserDashboard from "./pages/User/UserDashboard";
+import MyTasks from "./pages/User/MyTasks";
+import ViewTaskdetails from "./pages/User/ViewTaskdetails";
+import PrivateRoute from "./pages/routes/PrivateRoute";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
 
-export default App
+          {/* Admin Routes */}
+          <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/tasks" element={<ManageTasks />} />
+            <Route path="/admin/create-task" element={<CreateTask />} />
+            <Route path="/admin/users" element={<ManageUsers />} />
+          </Route>
+
+          {/* user Routes */}
+          <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
+            <Route path="/user/dashboard" element={<UserDashboard />} /> 
+            <Route path="/user/tasks" element={<MyTasks />} /> 
+            <Route path="/user/task-details/:id" element={<ViewTaskdetails />} />
+          </Route>
+        </Routes>
+      </Router>
+    </div>
+  );
+};
+
+export default App  
