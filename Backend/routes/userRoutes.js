@@ -8,4 +8,4 @@ const router = express.Router();
 router.get("/",protect, adminOnly, getUsers); //get all users (admin only)
 router.get("/:id", protect, getUserById); //get a spiecific user
 
-module.exports = router;
+module.exports = router; 
