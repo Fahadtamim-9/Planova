@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import DashboardLayout from '../../Components/layouts/DashboardLayout';
-import AvatarGroup from "../../Components/AvatarGroup";
+// import AvatarGroup from "../../Components/AvatarGroup";
 import moment from "moment";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 
